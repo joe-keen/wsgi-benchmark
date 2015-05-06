@@ -1,0 +1,4 @@
+pecan:
+    - debug set to false when using gunicorn with multiple processes
+        - Results in 500 error otherwise
+

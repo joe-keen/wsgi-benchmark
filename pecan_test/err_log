@@ -1,0 +1,88 @@
+[2015-05-06 22:44:51 +0000] [8243] [DEBUG] Current configuration:
+  proxy_protocol: False
+  worker_connections: 2000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7f71931ef6e0>
+  pythonpath: None
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 3
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7f71931ef410>
+  pre_fork: <function pre_fork at 0x7f71931ef578>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: None
+  group: 0
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 2
+  proc_name: None
+  sendfile: True
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x7f71931ef2a8>
+  pre_exec: <function pre_exec at 0x7f71931efc80>
+  worker_tmp_dir: None
+  post_worker_init: <function post_worker_init at 0x7f71931ef848>
+  limit_request_fields: 100
+  on_exit: <function on_exit at 0x7f71931f6398>
+  config: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7f71931efde8>
+  post_request: <function post_request at 0x7f71931efed8>
+  user: 0
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7f71931ef9b0>
+  threads: 1
+  max_requests: 0
+  limit_request_line: 4094
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  worker_exit: <function worker_exit at 0x7f71931f60c8>
+  chdir: /vagrant_home/projects/wsgi-benchmark/pecan_test
+  paste: None
+  default_proc_name: gunicorn
+  errorlog: ./err_log
+  loglevel: DEBUG
+  logconfig: None
+  syslog_addr: udp://localhost:514
+  syslog_prefix: None
+  daemon: False
+  ciphers: TLSv1
+  on_starting: <function on_starting at 0x7f71931ef140>
+  worker_abort: <function worker_abort at 0x7f71931efb18>
+  bind: ['0.0.0.0:8080']
+  raw_env: []
+  reload: False
+  check_config: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7f71931f6230>
+  timeout: 30
+  ca_certs: None
+  django_settings: None
+  tmp_upload_dir: None
+  keyfile: None
+  backlog: 1000
+  logger_class: gunicorn.glogging.Logger
+  statsd_prefix: 
+[2015-05-06 22:44:51 +0000] [8243] [INFO] Starting gunicorn 19.3.0
+[2015-05-06 22:44:51 +0000] [8243] [DEBUG] Arbiter booted
+[2015-05-06 22:44:51 +0000] [8243] [INFO] Listening at: http://0.0.0.0:8080 (8243)
+[2015-05-06 22:44:51 +0000] [8243] [INFO] Using worker: sync
+[2015-05-06 22:44:51 +0000] [8248] [INFO] Booting worker with pid: 8248
+[2015-05-06 22:44:51 +0000] [8249] [INFO] Booting worker with pid: 8249
+[2015-05-06 22:44:51 +0000] [8243] [DEBUG] 2 workers
+[2015-05-06 22:44:52 +0000] [8243] [DEBUG] 2 workers
+[2015-05-06 22:44:53 +0000] [8243] [DEBUG] 2 workers
+[2015-05-06 22:44:54 +0000] [8243] [DEBUG] 2 workers
+[2015-05-06 22:44:55 +0000] [8243] [DEBUG] 2 workers
+[2015-05-06 22:44:56 +0000] [8243] [DEBUG] 2 workers
+[2015-05-06 22:44:56 +0000] [8243] [INFO] Handling signal: int
+[2015-05-06 22:44:56 +0000] [8243] [INFO] Shutting down: Master
