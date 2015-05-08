@@ -1,0 +1,48 @@
+gunicorn/pecan with 9 worker nodes
+batched kafka writes
+faster schema validation
+-----Test Results-----
+2000000 metrics in 31.0411860943 seconds
+64430.5276843 per second
+
+------------------------------------------------
+gunicorn/pecan with 9 worker nodes
+batched kafka writes from within kafka library
+faster schema validation
+-----Test Results-----
+2000000 metrics in 22.8415122032 seconds
+87559.8770434 per second
+
+------------------------------------------------
+
+gunicorn/pecan with 9 worker nodes
+unbatched kafka writes
+faster schema validation
+-----Test Results-----
+2000000 metrics in 195.761991024 seconds
+10216.4878358 per second
+
+------------------------------------------------
+
+gunicorn/pecan with 9 worker nodes
+unbatched kafka writes
+voluptuous schema validation
+-----Test Results-----
+2000000 metrics in 234.310168982 seconds
+8535.69441178 per second
+
+------------------------------------------------
+
+gunicorn/pecan with monasca-api README config
+unbatched kafka writes
+voluptuous schema validation
+-----Test Results-----
+2000000 metrics in 1012.00510788 seconds
+1976.27461011 per second
+
+------------------------------------------------
+
+Java API
+-----Test Results-----
+2000000 metrics in 24.5165419579 seconds
+81577.5733559 per second
