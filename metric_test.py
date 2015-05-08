@@ -7,6 +7,7 @@ import warnings
 
 import requests
 
+from monascaclient import ksclient
 
 # suppress warnings to improve performance
 def no_warnings(message, category, filename, lineno):
@@ -26,14 +27,19 @@ keystone = {
     'auth_url': 'http://192.168.10.5:35357/v3'
 }
 
+# Python API
 api_url = 'http://192.168.10.4:8080/v2/metrics/'
-# api_url = 'http://192.168.10.4:8080/'
+# Java API
+# api_url = 'http://192.168.10.4:8080/v2.0/metrics'
+# External to the VM API
 # api_url = 'http://127.0.0.1:8080/v2.0/metrics/'
 
 total_metrics = num_processes * num_requests * num_metrics
 
 
 def agent_sim(num):
+    ks_client = ksclient.KSClient(**keystone)
+    token = ks_client.token
     for x in xrange(num_requests):
         body = []
         for i in xrange(num_metrics):
@@ -43,9 +49,13 @@ def agent_sim(num):
                       "value": 0}
             body.append(metric)
 
-        headers = {'Content-Type': 'application/json'}
-        requests.post(url=api_url, data=json.dumps(body), headers=headers)
-    print("Done: {}".format(num))
+        headers = {'Content-Type': 'application/json',
+                   'X-Auth-Token': token}
+        r = requests.post(url=api_url, data=json.dumps(body), headers=headers)
+        if r.status_code not in [200, 201, 204]:
+            print("bad result: {}".format(r))
+            print("truncating sending for node {}".format(num))
+            sys.exit(1)
 
 
 def metric_performance_test():

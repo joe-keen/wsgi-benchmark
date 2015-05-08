@@ -1,4 +1,3 @@
-import copy
 import json
 import logging
 import time
@@ -44,6 +43,27 @@ request_body_schema = voluptuous.Schema(
     voluptuous.Any(metric_schema, [metric_schema]))
 
 
+def val_custom(msg):
+    if isinstance(msg, list):
+        for m in msg:
+            validate_single_metric(m)
+    else:
+        validate_single_metric(msg)
+
+
+def validate_single_metric(metric):
+    assert isinstance(metric['name'], (str, unicode))
+    assert len(metric['name']) <= 64
+    assert isinstance(metric['timestamp'], (int, float))
+    assert isinstance(metric['value'], (int, long, float, complex))
+    if "dimensions" in metric:
+        for d in metric['dimensions']:
+            assert isinstance(d, (str, unicode))
+            assert len(d) <= 255
+            assert isinstance(metric['dimensions'][d], (str, unicode))
+            assert len(metric['dimensions'][d]) <= 255
+
+
 def validate(msg):
     try:
         request_body_schema(msg)
@@ -61,7 +81,7 @@ def transform(metrics, tenant_id, region):
         transformed_metrics = []
         for metric in metrics:
             transformed_metric['metric'] = metric
-            transformed_metrics.append(copy.deepcopy(transformed_metric))
+            transformed_metrics.append(json.dumps(transformed_metric))
         return transformed_metrics
     else:
         transformed_metric['metric'] = metrics
@@ -77,10 +97,20 @@ class Metrics(object):
     @index.when(method='POST', template='json')
     def foo(self):
         metrics = json.loads(pecan.request.body)
-        validate(metrics)
+        # validate(metrics)
+        val_custom(metrics)
         transformed_metrics = transform(metrics, "foo", "bar")
         key = time.time() * 1000
-        producer.send("metrics", key, json.dumps(transformed_metrics))
+
+        partition = producer._next_partition("metrics", key)
+        producer.send_messages("metrics", partition, *transformed_metrics)
+
+        # producer.send("metrics", key, json.dumps(transformed_metrics))
+        # if isinstance(transformed_metrics, list):
+        #    for metric in transformed_metrics:
+        #        producer.send("metrics", key, json.dumps(metric))
+        # else:
+        #    producer.send("metrics", key, json.dumps(transformed_metrics))
         return ""
 
 
