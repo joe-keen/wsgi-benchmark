@@ -1,10 +1,3 @@
-gunicorn/pecan with 9 worker nodes
-batched kafka writes
-faster schema validation
------Test Results-----
-2000000 metrics in 31.0411860943 seconds
-64430.5276843 per second
-
 ------------------------------------------------
 gunicorn/pecan with 9 worker nodes
 batched kafka writes from within kafka library
@@ -12,6 +5,15 @@ faster schema validation
 -----Test Results-----
 2000000 metrics in 22.8415122032 seconds
 87559.8770434 per second
+
+------------------------------------------------
+
+gunicorn/pecan with 9 worker nodes
+batched kafka writes
+faster schema validation
+-----Test Results-----
+2000000 metrics in 31.0411860943 seconds
+64430.5276843 per second
 
 ------------------------------------------------
 
